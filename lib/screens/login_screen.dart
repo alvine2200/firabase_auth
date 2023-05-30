@@ -11,8 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +46,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 30.0,
                 ),
                 reusableTextField('Enter Password', Icons.lock_outline, true,
-                    _passwordTextController)
+                    _passwordTextController),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                signInButton(context, true, () {}),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                linkPages(context, true)
               ],
             ),
           ),
