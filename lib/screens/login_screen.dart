@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../reusable_widgets/reusable.dart';
 import '../utils/colors_utils.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,22 +36,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 20, MediaQuery.of(context).size.height * 0.2, 20, 0),
             child: Column(
               children: <Widget>[
-                logoWidget("assets/images/BigPen.jpeg"),
+                circularLogoWidget("assets/images/BigPen.jpeg"),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                reusableTextField('Enter Email', Icons.person_outline, false,
+                    _emailTextController),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                reusableTextField('Enter Password', Icons.lock_outline, true,
+                    _passwordTextController)
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Image logoWidget(String imageName) {
-    return Image.asset(
-      imageName,
-      fit: BoxFit.cover,
-      width: 240,
-      height: 240,
-      // color: Colors.white,
     );
   }
 }
