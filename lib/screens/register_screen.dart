@@ -1,3 +1,4 @@
+import 'package:firebase_auth/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../reusable_widgets/reusable.dart';
@@ -83,7 +84,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(
                   height: 30.0,
                 ),
-                signInButton(context, false, () {}),
+                signInButton(
+                  context,
+                  false,
+                  () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const HomeScreenPage(),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
