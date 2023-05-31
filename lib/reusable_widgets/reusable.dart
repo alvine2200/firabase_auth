@@ -112,3 +112,37 @@ GestureDetector linkPages(context, bool isLogin) {
     ),
   );
 }
+
+Row linkAuthPages(context) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const Text(
+        'Dont Have An Account?',
+        style: TextStyle(
+          color: Colors.white70,
+          fontSize: 15.0,
+        ),
+      ),
+      GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const RegisterScreen();
+              },
+            ),
+          );
+        },
+        child: const Text(
+          'Sign Up',
+          style: TextStyle(
+              color: Colors.white70,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline),
+        ),
+      )
+    ],
+  );
+}

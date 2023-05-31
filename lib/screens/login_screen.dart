@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 30.0,
                 ),
-                linkPages(context, true)
+                linkAuthPages(context)
               ],
             ),
           ),

@@ -72,10 +72,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 30.0,
                 ),
                 signInButton(context, false, () {}),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                linkPages(context, false)
               ],
             ),
           ),
