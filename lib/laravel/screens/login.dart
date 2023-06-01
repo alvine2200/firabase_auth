@@ -27,24 +27,21 @@ class _SigninScreenState extends State<SigninScreen> {
     var response = await apiService.login(email, password);
 
     // Handle the API response
-    if (response != null && response['status'] == true) {
-      debugPrint(jsonDecode(response['token']));
-      // Login successful, navigate to the next screen
-      // ignore: use_build_context_synchronously
-      Navigator.pushNamed(
-        context,
+    if (response['status'] == true) {
+      debugPrint(response['token']);
+      Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const Dashboard(),
-        ) as String,
+        ),
       );
     } else {
       showDialog(
         context: context,
         builder: (BuildContext dialogContext) {
           return AlertDialog(
-            title: Text('Login Failed'),
+            title: const Text('Login Failed'),
             content: Text(response != null
-                ? jsonDecode(response['message'])
+                ? response['message']
                 : 'Unknown error occurred'),
             actions: <Widget>[
               TextButton(
