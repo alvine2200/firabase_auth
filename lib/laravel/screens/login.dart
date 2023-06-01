@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../Service/apiservice.dart';
 import '../reusable/reusable.dart';
 import '../utils/util.dart';
+import 'dashboard.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -15,8 +18,7 @@ class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
 
-  //login function
-  void _login() async {
+  void _login(context) async {
     String email = _emailTextController.text;
     String password = _passwordTextController.text;
 
@@ -25,38 +27,36 @@ class _SigninScreenState extends State<SigninScreen> {
     var response = await apiService.login(email, password);
 
     // Handle the API response
-    if (response != Null && response['status'] == true) {
-      debugPrint(response['token']);
+    if (response != null && response['status'] == true) {
+      debugPrint(jsonDecode(response['token']));
       // Login successful, navigate to the next screen
       // ignore: use_build_context_synchronously
-      // Navigator.pushNamed(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => const Dashboard(),
-      //   ) as String,
-      // );
+      Navigator.pushNamed(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Dashboard(),
+        ) as String,
+      );
     } else {
-      debugPrint(response['errors']);
-      debugPrint(response['message']);
-      // Login failed, show an error message
-      // ignore: use_build_context_synchronously
-      // showDialog(
-      //   context: context,
-      //   builder: (BuildContext context) {
-      //     return AlertDialog(
-      //       title: const Text('Login Failed'),
-      //       content: const Text('Invalid email or password.'),
-      //       actions: <Widget>[
-      //         TextButton(
-      //           child: const Text('OK'),
-      //           onPressed: () {
-      //             Navigator.of(context).pop();
-      //           },
-      //         ),
-      //       ],
-      //     );
-      //   },
-      // );
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            title: Text('Login Failed'),
+            content: Text(response != null
+                ? jsonDecode(response['message'])
+                : 'Unknown error occurred'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(dialogContext).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -98,7 +98,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   height: 30.0,
                 ),
                 signInButton(context, true, () {
-                  _login();
+                  _login(context);
                 }),
                 const SizedBox(
                   height: 30.0,
