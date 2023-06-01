@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Service/apiservice.dart';
 import '../reusable/reusable.dart';
 import '../utils/util.dart';
 
@@ -13,6 +14,44 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+
+  //login function
+  void _login(BuildContext context) async {
+    String email = _emailTextController.text;
+    String password = _passwordTextController.text;
+
+    // Call the API service
+    var apiService = ApiService();
+    var response = await apiService.login(email, password);
+
+    // Handle the API response
+    if (response != null && response['success']) {
+      // Login successful, navigate to the next screen
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, '/home');
+    } else {
+      // Login failed, show an error message
+      // ignore: use_build_context_synchronously
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Login Failed'),
+            content: const Text('Invalid email or password.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +89,9 @@ class _SigninScreenState extends State<SigninScreen> {
                 const SizedBox(
                   height: 30.0,
                 ),
-                signInButton(context, true, () {}),
+                signInButton(context, true, () {
+                  _login(context);
+                }),
                 const SizedBox(
                   height: 30.0,
                 ),
