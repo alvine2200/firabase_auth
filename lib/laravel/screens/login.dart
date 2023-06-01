@@ -16,7 +16,7 @@ class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _passwordTextController = TextEditingController();
 
   //login function
-  void _login(BuildContext context) async {
+  void _login() async {
     String email = _emailTextController.text;
     String password = _passwordTextController.text;
 
@@ -25,30 +25,38 @@ class _SigninScreenState extends State<SigninScreen> {
     var response = await apiService.login(email, password);
 
     // Handle the API response
-    if (response != null && response['success']) {
+    if (response != Null && response['status'] == true) {
+      debugPrint(response['token']);
       // Login successful, navigate to the next screen
       // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, '/home');
+      // Navigator.pushNamed(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => const Dashboard(),
+      //   ) as String,
+      // );
     } else {
+      debugPrint(response['errors']);
+      debugPrint(response['message']);
       // Login failed, show an error message
       // ignore: use_build_context_synchronously
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Login Failed'),
-            content: const Text('Invalid email or password.'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+      // showDialog(
+      //   context: context,
+      //   builder: (BuildContext context) {
+      //     return AlertDialog(
+      //       title: const Text('Login Failed'),
+      //       content: const Text('Invalid email or password.'),
+      //       actions: <Widget>[
+      //         TextButton(
+      //           child: const Text('OK'),
+      //           onPressed: () {
+      //             Navigator.of(context).pop();
+      //           },
+      //         ),
+      //       ],
+      //     );
+      //   },
+      // );
     }
   }
 
@@ -90,7 +98,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   height: 30.0,
                 ),
                 signInButton(context, true, () {
-                  _login(context);
+                  _login();
                 }),
                 const SizedBox(
                   height: 30.0,
