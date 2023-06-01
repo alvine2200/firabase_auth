@@ -24,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        toolbarHeight: 100.0,
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
