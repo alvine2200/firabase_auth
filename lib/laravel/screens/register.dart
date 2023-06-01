@@ -1,5 +1,5 @@
+import 'package:firebase_auth/laravel/screens/dashboard.dart';
 import 'package:firebase_auth/laravel/utils/util.dart';
-import 'package:firebase_auth/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../reusable/reusable.dart';
@@ -92,8 +92,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const HomeScreenPage(),
+                        builder: (BuildContext context) => const Dashboard(),
                       ),
                     );
                   },
