@@ -15,6 +15,8 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  String emailErrorText = '';
+  String passwordErrorText = '';
 
   void _login(context) async {
     String email = _emailTextController.text;
@@ -26,32 +28,20 @@ class _SigninScreenState extends State<SigninScreen> {
 
     // Handle the API response
     if (response['status'] == true) {
-      // debugPrint(response['token']);
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const Dashboard(),
         ),
       );
     } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return AlertDialog(
-            title: const Text('Login Failed'),
-            content: Text(response != null
-                ? response['message']
-                : 'Unknown error occurred'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(dialogContext).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
+      setState(() {
+        emailErrorText = response != null
+            ? response['errors']['email']
+            : 'Email Is Required';
+        passwordErrorText = response != null
+            ? response['errors']['password']
+            : 'Enter Password';
+      });
     }
   }
 
@@ -83,12 +73,12 @@ class _SigninScreenState extends State<SigninScreen> {
                   height: 30.0,
                 ),
                 reusableTextField('Enter Email', Icons.person_outline, false,
-                    _emailTextController),
+                    _emailTextController, emailErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
                 reusableTextField('Enter Password', Icons.lock_outline, true,
-                    _passwordTextController),
+                    _passwordTextController, passwordErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),

@@ -19,6 +19,17 @@ class _SignupScreenState extends State<SignupScreen> {
       TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _passwordConfirmationTextController =
+      TextEditingController();
+
+  String nameErrorText = "";
+  String countyErrorText = "";
+  String residenceErrorText = "";
+  String phoneErrorText = "";
+  String emailErrorText = "";
+  String passwordErrorText = "";
+  String passwordConfirmationErrorText = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,32 +68,45 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Column(
               children: <Widget>[
                 reusableTextField('Enter Name', Icons.person_outline, false,
-                    _nameTextController),
+                    _nameTextController, nameErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
-                reusableTextField(
-                    'Enter Phone', Icons.phone, false, _phoneTextController),
+                reusableTextField('Enter Phone', Icons.phone, false,
+                    _phoneTextController, phoneErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
                 reusableTextField('Enter County Name', Icons.map, false,
-                    _countyTextController),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                reusableTextField('Enter Area Of Residence',
-                    Icons.area_chart_sharp, false, _residenceTextController),
+                    _countyTextController, countyErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
                 reusableTextField(
-                    'Enter Email', Icons.email, false, _emailTextController),
+                    'Enter Area Of Residence',
+                    Icons.area_chart_sharp,
+                    false,
+                    _residenceTextController,
+                    residenceErrorText),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                reusableTextField('Enter Email', Icons.email, false,
+                    _emailTextController, emailErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
                 reusableTextField('Enter Password', Icons.lock_outline, true,
-                    _passwordTextController),
+                    _passwordTextController, passwordErrorText),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                reusableTextField(
+                    'Enter Password Again',
+                    Icons.lock_outline,
+                    true,
+                    _passwordConfirmationTextController,
+                    passwordConfirmationErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),

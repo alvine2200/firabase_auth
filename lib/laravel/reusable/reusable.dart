@@ -16,7 +16,7 @@ ClipOval circularLogoWidget(String imageName) {
 
 //reusable textFields
 TextField reusableTextField(String text, IconData icon, bool isPasswordType,
-    TextEditingController controller) {
+    TextEditingController controller, String errorText) {
   return TextField(
     controller: controller,
     obscureText: isPasswordType,
@@ -31,14 +31,31 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
         icon,
         color: Colors.white70,
       ),
+      errorText: errorText,
       labelText: text,
       labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
       fillColor: Colors.white.withOpacity(0.3),
+      // border: InputBorder.none, // No border
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(30.0),
         borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(
+            color: Colors.blue), // Border color for focus state
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide:
+            const BorderSide(color: Colors.red), // Border color for error state
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30.0),
+        borderSide: const BorderSide(
+            color: Colors.red), // Border color for focused error state
       ),
     ),
     keyboardType: isPasswordType
