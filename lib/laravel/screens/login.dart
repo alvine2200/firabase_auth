@@ -40,12 +40,12 @@ class _SigninScreenState extends State<SigninScreen> {
       setState(() {
         emailErrorText = 'Email is required';
       });
-      return;
+      return null;
     } else if (!_isValidEmail(email)) {
       setState(() {
         emailErrorText = 'Invalid email';
       });
-      return;
+      return null;
     }
 
     if (password.isEmpty) {

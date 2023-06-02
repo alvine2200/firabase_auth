@@ -16,7 +16,7 @@ ClipOval circularLogoWidget(String imageName) {
 
 //reusable textFields
 TextField reusableTextField(String text, IconData icon, bool isPasswordType,
-    TextEditingController controller, String errorText) {
+    TextEditingController controller, String errors) {
   return TextField(
     controller: controller,
     obscureText: isPasswordType,
@@ -31,7 +31,7 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
         icon,
         color: Colors.white70,
       ),
-      errorText: errorText,
+      errorText: errors,
       labelText: text,
       labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
       filled: true,
@@ -47,16 +47,32 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
         borderSide: const BorderSide(
             color: Colors.blue), // Border color for focus state
       ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        borderSide:
-            const BorderSide(color: Colors.red), // Border color for error state
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30.0),
-        borderSide: const BorderSide(
-            color: Colors.red), // Border color for focused error state
-      ),
+      errorBorder: errors.isNotEmpty
+          ? OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                color: Colors.red,
+              ),
+            )
+          : OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                color: Colors.grey,
+              ),
+            ), // No border if there's no error
+
+      focusedErrorBorder: errors.isNotEmpty
+          ? OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                  color: Colors.red), // Border color for focused error state
+            )
+          : OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: const BorderSide(
+                color: Colors.blue,
+              ),
+            ),
     ),
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
