@@ -100,7 +100,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => $th->getMessage(),
-                'errors' => ''
+                'errors' => null,
             ], 500);
         }
     }

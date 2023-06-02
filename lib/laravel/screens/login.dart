@@ -35,6 +35,21 @@ class _SigninScreenState extends State<SigninScreen> {
       passwordErrorText = '';
     });
 
+    // Validate input fields
+    if (email.isEmpty) {
+      setState(() {
+        emailErrorText = 'Email is required';
+      });
+      return;
+    }
+
+    if (password.isEmpty) {
+      setState(() {
+        passwordErrorText = 'Password is required';
+      });
+      return;
+    }
+
     // Call the API service
     var apiService = ApiService();
     var response = await apiService.login(email, password);
@@ -46,20 +61,19 @@ class _SigninScreenState extends State<SigninScreen> {
           builder: (context) => const Dashboard(),
         ),
       );
-    } else if (response['errors'] == null && response['status'] == false) {
-      // Display error message in SnackBar
-      // Display error message in SnackBar
-      final snackBar = SnackBar(
-          content: Text('An error occurred: ${response['message']?[0]}'));
-      _scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
     } else {
+      if (response['errors'] == null && response['status'] == false) {
+        // Display error message in SnackBar
+        final snackBar = SnackBar(content: Text(response['message']));
+        _scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
+      }
       setState(() {
-        emailErrorText = response != null
+        emailErrorText = response['errors']['email'] != null
             ? response['errors']['email'][0]
             : 'Email Is Required';
-        passwordErrorText = response != null
+        passwordErrorText = response['errors']['password'] != null
             ? response['errors']['password'][0]
-            : 'Enter Password';
+            : 'Password is Required';
       });
     }
   }
