@@ -15,6 +15,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _phoneTextController = TextEditingController();
   final TextEditingController _countyTextController = TextEditingController();
+  final TextEditingController _subcountyTextController =
+      TextEditingController();
   final TextEditingController _residenceTextController =
       TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
@@ -24,6 +26,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   String nameErrorText = "";
   String countyErrorText = "";
+  String subcountyErrorText = "";
   String residenceErrorText = "";
   String phoneErrorText = "";
   String emailErrorText = "";
@@ -77,8 +80,18 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(
                   height: 30.0,
                 ),
-                reusableTextField('Enter County Name', Icons.map, false,
+                reusableTextField('Enter Email', Icons.email, false,
+                    _emailTextController, emailErrorText),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                reusableTextField('Enter County ', Icons.map, false,
                     _countyTextController, countyErrorText),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                reusableTextField('Enter Sub-County', Icons.map, false,
+                    _subcountyTextController, subcountyErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
@@ -88,11 +101,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     false,
                     _residenceTextController,
                     residenceErrorText),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                reusableTextField('Enter Email', Icons.email, false,
-                    _emailTextController, emailErrorText),
                 const SizedBox(
                   height: 30.0,
                 ),
