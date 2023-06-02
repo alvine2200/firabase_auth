@@ -68,8 +68,7 @@ class AuthController extends Controller
         $validateUser = Validator::make(
             $request->all(),
             [
-                'name' => 'required',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email|exists:users,email',
                 'password' => 'required'
             ]
         );
@@ -79,7 +78,7 @@ class AuthController extends Controller
                 'status' => false,
                 'message' => 'validation error',
                 'errors' => $validateUser->errors()
-            ], 401);
+            ], 500);
         }
 
         try {

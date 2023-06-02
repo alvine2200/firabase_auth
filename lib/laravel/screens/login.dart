@@ -21,6 +21,15 @@ class _SigninScreenState extends State<SigninScreen> {
   void _login(context) async {
     String email = _emailTextController.text;
     String password = _passwordTextController.text;
+    // Clear text fields
+    _emailTextController.clear();
+    _passwordTextController.clear();
+
+    // Reset error messages
+    setState(() {
+      emailErrorText = '';
+      passwordErrorText = '';
+    });
 
     // Call the API service
     var apiService = ApiService();
@@ -36,10 +45,10 @@ class _SigninScreenState extends State<SigninScreen> {
     } else {
       setState(() {
         emailErrorText = response != null
-            ? response['errors']['email']
+            ? response['errors']['email'][0]
             : 'Email Is Required';
         passwordErrorText = response != null
-            ? response['errors']['password']
+            ? response['errors']['password'][0]
             : 'Enter Password';
       });
     }
