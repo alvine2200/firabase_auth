@@ -13,6 +13,10 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
+  //error top right corner
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
   String emailErrorText = '';
@@ -42,6 +46,12 @@ class _SigninScreenState extends State<SigninScreen> {
           builder: (context) => const Dashboard(),
         ),
       );
+    } else if (response['errors'] == null && response['status'] == false) {
+      // Display error message in SnackBar
+      // Display error message in SnackBar
+      final snackBar = SnackBar(
+          content: Text('An error occurred: ${response['message']?[0]}'));
+      _scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
     } else {
       setState(() {
         emailErrorText = response != null
@@ -56,49 +66,52 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              hexStringToColor("CB2B93"),
-              hexStringToColor("9546C4"),
-              hexStringToColor("5E61F4")
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
-            child: Column(
-              children: <Widget>[
-                circularLogoWidget("assets/images/BigPen.jpeg"),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                reusableTextField('Enter Email', Icons.person_outline, false,
-                    _emailTextController, emailErrorText),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                reusableTextField('Enter Password', Icons.lock_outline, true,
-                    _passwordTextController, passwordErrorText),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                signInButton(context, true, () {
-                  _login(context);
-                }),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                linkAuthPages(context)
+    return ScaffoldMessenger(
+      key: _scaffoldMessengerKey,
+      child: Scaffold(
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                hexStringToColor("CB2B93"),
+                hexStringToColor("9546C4"),
+                hexStringToColor("5E61F4")
               ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+              child: Column(
+                children: <Widget>[
+                  circularLogoWidget("assets/images/BigPen.jpeg"),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  reusableTextField('Enter Email', Icons.person_outline, false,
+                      _emailTextController, emailErrorText),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  reusableTextField('Enter Password', Icons.lock_outline, true,
+                      _passwordTextController, passwordErrorText),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  signInButton(context, true, () {
+                    _login(context);
+                  }),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                  linkAuthPages(context)
+                ],
+              ),
             ),
           ),
         ),
