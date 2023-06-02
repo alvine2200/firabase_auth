@@ -41,6 +41,11 @@ class _SigninScreenState extends State<SigninScreen> {
         emailErrorText = 'Email is required';
       });
       return;
+    } else if (!_isValidEmail(email)) {
+      setState(() {
+        emailErrorText = 'Invalid email';
+      });
+      return;
     }
 
     if (password.isEmpty) {
@@ -132,4 +137,12 @@ class _SigninScreenState extends State<SigninScreen> {
       ),
     );
   }
+}
+
+bool _isValidEmail(String email) {
+  // Simple email validation using regular expression
+  // This is a basic check and may not cover all possible email formats
+  // You can use a more comprehensive email validation approach if needed
+  RegExp emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+  return emailRegex.hasMatch(email);
 }
