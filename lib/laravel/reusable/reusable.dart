@@ -16,7 +16,9 @@ ClipOval circularLogoWidget(String imageName) {
 
 //reusable textFields
 TextField reusableTextField(String text, IconData icon, bool isPasswordType,
-    TextEditingController controller, String errors) {
+    TextEditingController controller, String errorText) {
+  bool hasError = errorText.isNotEmpty;
+
   return TextField(
     controller: controller,
     obscureText: isPasswordType,
@@ -31,7 +33,7 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
         icon,
         color: Colors.white70,
       ),
-      errorText: errors,
+      errorText: errorText,
       labelText: text,
       labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
       filled: true,
@@ -47,21 +49,18 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
         borderSide: const BorderSide(
             color: Colors.blue), // Border color for focus state
       ),
-      errorBorder: errors.isNotEmpty
+      errorBorder: hasError
           ? OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
               borderSide: const BorderSide(
-                color: Colors.red,
-              ),
+                  color: Colors.red), // Border color for error state
             )
           : OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
               borderSide: const BorderSide(
-                color: Colors.grey,
-              ),
-            ), // No border if there's no error
-
-      focusedErrorBorder: errors.isNotEmpty
+                  color: Colors.grey), // Border color for focus state
+            ),
+      focusedErrorBorder: hasError
           ? OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
               borderSide: const BorderSide(
@@ -70,8 +69,7 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
           : OutlineInputBorder(
               borderRadius: BorderRadius.circular(30.0),
               borderSide: const BorderSide(
-                color: Colors.blue,
-              ),
+                  color: Colors.grey), // Border color for focus state
             ),
     ),
     keyboardType: isPasswordType
