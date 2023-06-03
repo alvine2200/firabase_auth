@@ -275,7 +275,7 @@ void showSuccessToast(String message) {
     msg: message,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.TOP_RIGHT,
-    timeInSecForIosWeb: 1,
+    timeInSecForIosWeb: 5,
     backgroundColor: Colors.green,
     textColor: Colors.white,
     fontSize: 16.0,

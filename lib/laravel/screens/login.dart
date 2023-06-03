@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Service/apiservice.dart';
 import '../reusable/reusable.dart';
@@ -40,12 +41,10 @@ class _SigninScreenState extends State<SigninScreen> {
       setState(() {
         emailErrorText = 'Email is required';
       });
-      return null;
     } else if (!_isValidEmail(email)) {
       setState(() {
         emailErrorText = 'Invalid email';
       });
-      return null;
     }
 
     if (password.isEmpty) {
@@ -61,6 +60,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
     // Handle the API response
     if (response['status'] == true) {
+      showSuccessToast('Login successfully!');
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const Dashboard(),
@@ -140,9 +140,18 @@ class _SigninScreenState extends State<SigninScreen> {
 }
 
 bool _isValidEmail(String email) {
-  // Simple email validation using regular expression
-  // This is a basic check and may not cover all possible email formats
-  // You can use a more comprehensive email validation approach if needed
   RegExp emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
   return emailRegex.hasMatch(email);
+}
+
+void showSuccessToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.TOP_RIGHT,
+    timeInSecForIosWeb: 5,
+    backgroundColor: Colors.green,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }
