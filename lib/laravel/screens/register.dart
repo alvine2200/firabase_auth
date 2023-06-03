@@ -49,6 +49,77 @@ class _SignupScreenState extends State<SignupScreen> {
     String password = _passwordTextController.text;
     String passwordConfirmation = _passwordConfirmationTextController.text;
 
+    // Clear text fields
+    _nameTextController.clear();
+    _phoneTextController.clear();
+    _emailTextController.clear();
+    _countyTextController.clear();
+    _subcountyTextController.clear();
+    _residenceTextController.clear();
+    _passwordTextController.clear();
+    _passwordConfirmationTextController.clear();
+
+    // Reset error messages
+    setState(() {
+      nameErrorText = "";
+      countyErrorText = "";
+      subcountyErrorText = "";
+      residenceErrorText = "";
+      phoneErrorText = "";
+      emailErrorText = "";
+      passwordErrorText = "";
+      passwordConfirmationErrorText = "";
+    });
+
+    // Validate input fields
+    if (name.isEmpty) {
+      setState(() {
+        nameErrorText = 'Name is required';
+      });
+      return;
+    }
+    if (phone.isEmpty) {
+      setState(() {
+        phoneErrorText = 'Phone is required';
+      });
+      return;
+    }
+    if (email.isEmpty) {
+      setState(() {
+        emailErrorText = 'Email is required';
+      });
+      return null;
+    } else if (!_isValidEmail(email)) {
+      setState(() {
+        emailErrorText = 'Invalid email';
+      });
+      return null;
+    }
+    if (county.isEmpty) {
+      setState(() {
+        countyErrorText = 'County is required';
+      });
+      return;
+    }
+    if (subcounty.isEmpty) {
+      setState(() {
+        subcountyErrorText = 'Subcounty is required';
+      });
+      return;
+    }
+    if (residence.isEmpty) {
+      setState(() {
+        residenceErrorText = 'Residence is required';
+      });
+      return;
+    }
+    if (password.isEmpty) {
+      setState(() {
+        passwordErrorText = 'Password is required';
+      });
+      return;
+    }
+
     // Call the API service
     var apiService = ApiService();
     var response = await apiService.register(name, phone, email, county,
@@ -197,4 +268,8 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 }
 
-
+//email regex validation
+bool _isValidEmail(String email) {
+  RegExp emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+  return emailRegex.hasMatch(email);
+}
