@@ -61,15 +61,32 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       );
     } else {
-      if (response['errors'] == null && response['status'] == false) {
+      if (response['errors'] == null &&
+          response['status'] == false &&
+          response['message'] != null) {
         // Display error message in SnackBar
         final snackBar = SnackBar(content: Text(response['message']));
         _scaffoldMessengerKey.currentState?.showSnackBar(snackBar);
       }
       setState(() {
+        nameErrorText = response['errors']['name'] != null
+            ? response['errors']['name'][0]
+            : 'Name Is Required';
+        phoneErrorText = response['errors']['phone'] != null
+            ? response['errors']['phone'][0]
+            : 'Phone is Required';
         emailErrorText = response['errors']['email'] != null
             ? response['errors']['email'][0]
             : 'Email Is Required';
+        countyErrorText = response['errors']['county'] != null
+            ? response['errors']['county'][0]
+            : 'County is Required';
+        subcountyErrorText = response['errors']['subcounty'] != null
+            ? response['errors']['subcounty'][0]
+            : 'SubCounty Is Required';
+        residenceErrorText = response['errors']['residence'] != null
+            ? response['errors']['residence'][0]
+            : 'Residence Is Required';
         passwordErrorText = response['errors']['password'] != null
             ? response['errors']['password'][0]
             : 'Password is Required';
@@ -169,11 +186,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       false,
                       () {
                         _registerUser(context);
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (BuildContext context) => const Dashboard(),
-                        //   ),
-                        // );
                       },
                     ),
                   ],
@@ -184,3 +196,5 @@ class _SignupScreenState extends State<SignupScreen> {
         ));
   }
 }
+
+

@@ -39,8 +39,8 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
-                    'message' => $validateUser->errors()
-                ], 401);
+                    'errors' => $validateUser->errors()
+                ], 500);
             }
 
             $user = User::create([
