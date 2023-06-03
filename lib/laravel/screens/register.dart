@@ -76,42 +76,35 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         nameErrorText = 'Name is required';
       });
-      return;
     }
     if (phone.isEmpty) {
       setState(() {
         phoneErrorText = 'Phone is required';
       });
-      return;
     }
     if (email.isEmpty) {
       setState(() {
         emailErrorText = 'Email is required';
       });
-      return null;
     } else if (!_isValidEmail(email)) {
       setState(() {
         emailErrorText = 'Invalid email';
       });
-      return null;
     }
     if (county.isEmpty) {
       setState(() {
         countyErrorText = 'County is required';
       });
-      return;
     }
     if (subcounty.isEmpty) {
       setState(() {
         subcountyErrorText = 'Subcounty is required';
       });
-      return;
     }
     if (residence.isEmpty) {
       setState(() {
         residenceErrorText = 'Residence is required';
       });
-      return;
     }
     if (password.isEmpty) {
       setState(() {
