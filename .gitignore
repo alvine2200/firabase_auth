@@ -1,0 +1,5 @@
+/.env
+/.dart_tool
+/.idea
+/storage
+/public/storage
