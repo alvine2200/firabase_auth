@@ -1,6 +1,7 @@
 import 'package:firebase_auth/laravel/screens/dashboard.dart';
 import 'package:firebase_auth/laravel/utils/util.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Service/apiservice.dart';
 import '../reusable/reusable.dart';
@@ -119,6 +120,8 @@ class _SignupScreenState extends State<SignupScreen> {
         subcounty, residence, password, passwordConfirmation);
 
     if (response['status'] == true) {
+      // Show success toast message
+      showSuccessToast('Registration successful!');
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const Dashboard(),
@@ -265,4 +268,16 @@ class _SignupScreenState extends State<SignupScreen> {
 bool _isValidEmail(String email) {
   RegExp emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
   return emailRegex.hasMatch(email);
+}
+
+void showSuccessToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.TOP_RIGHT,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.green,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }

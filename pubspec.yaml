@@ -37,7 +37,7 @@ dependencies:
   get: ^4.6.5
   firebase_core: ^2.13.1
   http: ^1.0.0
-  toast: ^0.3.0
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:
