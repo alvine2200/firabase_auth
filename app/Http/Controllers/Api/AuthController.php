@@ -24,25 +24,32 @@ class AuthController extends Controller
             $validateUser = Validator::make(
                 $request->all(),
                 [
-                    
-                    'name' => 'required',
-
+                    'name' => 'required|string',
+                    'phone' => 'required|string|max:20',
                     'email' => 'required|email|unique:users,email',
-                    'password' => 'required|confirmed'
+                    'county' => 'required|string|max:20',
+                    'subcounty' => 'required|string|max:20',
+                    'residence' => 'required|string|max:20',
+                    'password' => 'required|confirmed',
+
                 ]
             );
 
             if ($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
-                    // 'message' => 'validation error',
+                    'message' => 'validation error',
                     'message' => $validateUser->errors()
                 ], 401);
             }
 
             $user = User::create([
                 'name' => $request->name,
+                'phone' => $request->phone,
                 'email' => $request->email,
+                'county' => $request->county,
+                'subcounty' => $request->subcounty,
+                'residence' => $request->residence,
                 'password' => Hash::make($request->password)
             ]);
 
@@ -54,7 +61,8 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage()
+                'message' => $th->getMessage(),
+                'errors' => null,
             ], 500);
         }
     }
