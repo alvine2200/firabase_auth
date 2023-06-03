@@ -2,3 +2,11 @@
 firebase_core=/home/llavu/.pub-cache/hosted/pub.dev/firebase_core-2.13.1/
 firebase_core_web=/home/llavu/.pub-cache/hosted/pub.dev/firebase_core_web-2.5.0/
 fluttertoast=/home/llavu/.pub-cache/hosted/pub.dev/fluttertoast-8.2.2/
+path_provider_linux=/home/llavu/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11/
+path_provider_windows=/home/llavu/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6/
+shared_preferences=/home/llavu/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1/
+shared_preferences_android=/home/llavu/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/
+shared_preferences_foundation=/home/llavu/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/
+shared_preferences_linux=/home/llavu/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.2.0/
+shared_preferences_web=/home/llavu/.pub-cache/hosted/pub.dev/shared_preferences_web-2.1.0/
+shared_preferences_windows=/home/llavu/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.2.0/

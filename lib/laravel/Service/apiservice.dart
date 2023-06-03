@@ -52,5 +52,16 @@ class ApiService {
   }
 
   //logout
-  
+  Future<Map<String, dynamic>> logout(token) async {
+    final response = await http.post(Uri.parse('${baseUrl}logout'), headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return jsonDecode(response.body);
+    }
+  }
 }
