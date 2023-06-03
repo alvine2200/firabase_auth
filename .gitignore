@@ -3,3 +3,6 @@
 /.idea
 /storage
 /public/storage
+/pubsec.yaml
+/vendor
+/composer.json

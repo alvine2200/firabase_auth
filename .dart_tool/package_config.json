@@ -188,6 +188,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "toast",
+      "rootUri": "file:///home/llavu/.pub-cache/hosted/pub.dev/toast-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///home/llavu/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
@@ -206,7 +212,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-06-02T07:37:05.930448Z",
+  "generated": "2023-06-03T10:09:31.266351Z",
   "generator": "pub",
   "generatorVersion": "3.0.2"
 }
