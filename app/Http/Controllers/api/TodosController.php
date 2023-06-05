@@ -16,6 +16,12 @@ class TodosController extends Controller
      */
     public function index(Request $request)
     {
+        $todos = Todo::all();
+        return response()->json([
+            'status' => 'true',
+            'message' => 'todos fetched successfully',
+            'data' => $todos,
+        ]);
     }
 
     /**
@@ -75,7 +81,16 @@ class TodosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $todo = Todo::find($id);
+        $todo->update([
+            'name' => $request->name,
+            'completed' => $request->completed,
+        ]);
+        return response()->json([
+            'status' => 'true',
+            'message' => 'todo suxxessfully update',
+            'data' => $todo,
+        ], 200);
     }
 
     /**
@@ -86,6 +101,11 @@ class TodosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $todo = Todo::find($id)->delete();
+        return response()->json([
+            'status' => 'true',
+            'message' => 'todo deleted successfully',
+            'data' => $todo,
+        ], 200);
     }
 }
