@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TodosController extends Controller
 {
@@ -12,9 +14,8 @@ class TodosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
     }
 
     /**
@@ -25,7 +26,22 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'status' => 'false',
+                'message' => 'validation error',
+                'errors' => $validate->errors(),
+            ]);
+        }
+
+        Todo::create([
+            'name' => $request->name,
+            'completed' => 0,
+        ]);
     }
 
     /**
