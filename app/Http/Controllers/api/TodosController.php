@@ -38,10 +38,16 @@ class TodosController extends Controller
             ]);
         }
 
-        Todo::create([
+        $todo = Todo::create([
             'name' => $request->name,
             'completed' => 0,
         ]);
+
+        return response()->json([
+            'status' => 'true',
+            'message' => 'Todo created successfully',
+            'data' => $todo,
+        ], 201);
     }
 
     /**
@@ -52,7 +58,12 @@ class TodosController extends Controller
      */
     public function show($id)
     {
-        //
+        $todo = Todo::find($id);
+        return response()->json([
+            'status' => 'false',
+            'message' => 'validation error',
+            'data' => $todo,
+        ]);
     }
 
     /**
