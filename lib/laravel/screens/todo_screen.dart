@@ -17,6 +17,7 @@ class _TodoAppState extends State<TodoApp> {
         centerTitle: true,
       ),
       body: Container(
+        padding: const EdgeInsets.only(top: 20.0),
         margin: const EdgeInsets.all(10.0),
         child: Column(
           children: [
@@ -52,10 +53,11 @@ class _TodoAppState extends State<TodoApp> {
               height: 20.0,
             ),
             Container(
+              padding: const EdgeInsets.all(10),
               width: double.infinity,
-              height: 60.0,
+              height: 80.0,
               decoration: BoxDecoration(
-                color: Colors.grey.shade400,
+                color: Colors.grey.shade300,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
@@ -64,6 +66,32 @@ class _TodoAppState extends State<TodoApp> {
                   children: [
                     Checkbox(
                       value: true,
+                      onChanged: (value) {
+                        //
+                      },
+                    ),
+                    const Text('Complete'),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              height: 80.0,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                title: const Text('Todo text here'),
+                subtitle: Row(
+                  children: [
+                    Checkbox(
+                      value: false,
                       onChanged: (value) {
                         //
                       },

@@ -33,7 +33,8 @@ class TodosController extends Controller
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'completed' => 'required|boolean',
         ]);
 
         if ($validate->fails()) {
@@ -84,6 +85,19 @@ class TodosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'completed' => 'required|boolean',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'status' => 'false',
+                'message' => 'validation error',
+                'errors' => $validate->errors(),
+            ]);
+        }
+
         $todo = Todo::find($id);
         $todo->update([
             'name' => $request->name,
