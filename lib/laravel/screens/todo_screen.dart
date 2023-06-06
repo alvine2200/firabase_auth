@@ -55,54 +55,36 @@ class _TodoAppState extends State<TodoApp> {
             const SizedBox(
               height: 20.0,
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              width: double.infinity,
-              height: 80.0,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                title: const Text('Todo text here'),
-                subtitle: Row(
-                  children: [
-                    Checkbox(
-                      value: true,
-                      onChanged: (value) {
-                        //
-                      },
-                    ),
-                    const Text('Complete'),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              width: double.infinity,
-              height: 80.0,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                title: const Text('Todo text here'),
-                subtitle: Row(
-                  children: [
-                    Checkbox(
-                      value: false,
-                      onChanged: (value) {
-                        //
-                      },
-                    ),
-                    const Text('Incomplete'),
-                  ],
-                ),
-              ),
+            Obx(
+              () {
+                return _todoController.loading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Container(
+                        padding: const EdgeInsets.all(10),
+                        width: double.infinity,
+                        height: 80.0,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListTile(
+                          title: const Text('Todo text here'),
+                          subtitle: Row(
+                            children: [
+                              Checkbox(
+                                value: true,
+                                onChanged: (value) {
+                                  //
+                                },
+                              ),
+                              const Text('Complete'),
+                            ],
+                          ),
+                        ),
+                      );
+              },
             ),
           ],
         ),
