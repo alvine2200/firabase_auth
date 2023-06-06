@@ -41,9 +41,37 @@ class _TodoAppState extends State<TodoApp> {
                   onPressed: () {
                     //
                   },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                  ),
                   child: const Text('Save'),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Container(
+              width: double.infinity,
+              height: 60.0,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade400,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                title: const Text('Todo text here'),
+                subtitle: Row(
+                  children: [
+                    Checkbox(
+                      value: true,
+                      onChanged: (value) {
+                        //
+                      },
+                    ),
+                    const Text('Incomplete'),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
