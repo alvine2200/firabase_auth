@@ -1,5 +1,5 @@
-.dart_tool
-.idea
+/.dart_tool
+/.idea
 /storage
 /public/storage
 pubsec.yaml
