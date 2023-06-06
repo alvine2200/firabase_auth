@@ -46,7 +46,7 @@ class TodosController extends Controller
 
         $todo = Todo::create([
             'name' => $request->name,
-            'completed' => 0,
+            'completed' => $request->completed,
         ]);
 
         return response()->json([
@@ -72,6 +72,9 @@ class TodosController extends Controller
         ]);
     }
 
+
+    // 
+
     /**
      * Update the specified resource in storage.
      *
@@ -88,7 +91,7 @@ class TodosController extends Controller
         ]);
         return response()->json([
             'status' => 'true',
-            'message' => 'todo suxxessfully update',
+            'message' => 'todo successfully update',
             'data' => $todo,
         ], 200);
     }
