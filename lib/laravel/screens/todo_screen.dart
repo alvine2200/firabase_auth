@@ -62,11 +62,12 @@ class _TodoAppState extends State<TodoApp> {
                         child: CircularProgressIndicator(),
                       )
                     : ListView.builder(
-                        itemCount: 3,
+                        itemCount: _todoController.todos.value.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Container(
                             padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10.0),
                             width: double.infinity,
                             height: 80.0,
                             decoration: BoxDecoration(
@@ -74,16 +75,28 @@ class _TodoAppState extends State<TodoApp> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: ListTile(
-                              title: const Text('Todo text here'),
+                              title: Text(_todoController
+                                  .todos.value[index].name
+                                  .toString()),
                               subtitle: Row(
                                 children: [
                                   Checkbox(
-                                    value: true,
+                                    value: _todoController
+                                                .todos.value[index].completed ==
+                                            1
+                                        ? true
+                                        : false,
                                     onChanged: (value) {
                                       //
                                     },
                                   ),
-                                  const Text('Complete'),
+                                  Text(
+                                    _todoController
+                                                .todos.value[index].completed ==
+                                            1
+                                        ? 'Completed'
+                                        : 'Pending',
+                                  ),
                                 ],
                               ),
                             ),

@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+TodoModel todoModelFromJson(String str) => TodoModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String todoModelToJson(TodoModel data) => json.encode(data.toJson());
 
-class Welcome {
+class TodoModel {
   int? id;
   String? name;
   int? completed;
   DateTime? createdAt;
   DateTime? updatedAt;
 
-  Welcome({
+  TodoModel({
     required this.id,
     required this.name,
     required this.completed,
@@ -19,7 +19,7 @@ class Welcome {
     required this.updatedAt,
   });
 
-  factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+  factory TodoModel.fromJson(Map<String, dynamic> json) => TodoModel(
         id: json["id"],
         name: json["name"],
         completed: json["completed"],
