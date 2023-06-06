@@ -61,28 +61,34 @@ class _TodoAppState extends State<TodoApp> {
                     ? const Center(
                         child: CircularProgressIndicator(),
                       )
-                    : Container(
-                        padding: const EdgeInsets.all(10),
-                        width: double.infinity,
-                        height: 80.0,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListTile(
-                          title: const Text('Todo text here'),
-                          subtitle: Row(
-                            children: [
-                              Checkbox(
-                                value: true,
-                                onChanged: (value) {
-                                  //
-                                },
+                    : ListView.builder(
+                        itemCount: 3,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: const EdgeInsets.all(10),
+                            width: double.infinity,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ListTile(
+                              title: const Text('Todo text here'),
+                              subtitle: Row(
+                                children: [
+                                  Checkbox(
+                                    value: true,
+                                    onChanged: (value) {
+                                      //
+                                    },
+                                  ),
+                                  const Text('Complete'),
+                                ],
                               ),
-                              const Text('Complete'),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        },
                       );
               },
             ),

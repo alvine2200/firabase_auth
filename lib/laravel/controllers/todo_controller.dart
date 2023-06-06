@@ -12,7 +12,7 @@ class TodoController extends GetxController {
     getAllTodo();
   }
 
-  static const String serverIp = "http://192.168.43.177:80/api/";
+  static const String serverIp = "http://192.168.0.168:80/api/";
 
   Future getAllTodo() async {
     try {
