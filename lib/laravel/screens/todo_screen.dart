@@ -1,4 +1,6 @@
+import 'package:firebase_auth/laravel/controllers/todo_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TodoApp extends StatefulWidget {
   const TodoApp({super.key});
@@ -8,6 +10,7 @@ class TodoApp extends StatefulWidget {
 }
 
 class _TodoAppState extends State<TodoApp> {
+  final TodoController _todoController = Get.put(TodoController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,7 @@ class _TodoAppState extends State<TodoApp> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    //
+                    _todoController;
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
