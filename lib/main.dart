@@ -1,4 +1,4 @@
-import 'package:firebase_auth/laravel/screens/login.dart';
+import 'package:firebase_auth/laravel/screens/todo_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SigninScreen(),
+      home: TodoApp(),
     );
   }
 }

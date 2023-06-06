@@ -13,6 +13,10 @@ class _TodoAppState extends State<TodoApp> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo App'),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: Container(
+        margin: const EdgeInsets.all(10.0),
       ),
     );
   }
