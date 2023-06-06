@@ -1,10 +1,10 @@
+import 'package:firebase_auth/laravel/screens/todo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Service/apiservice.dart';
 import '../reusable/reusable.dart';
 import '../utils/util.dart';
-import 'dashboard.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -63,7 +63,7 @@ class _SigninScreenState extends State<SigninScreen> {
       showSuccessToast('Login successfully!');
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const Dashboard(),
+          builder: (context) => const TodoApp(),
         ),
       );
     } else {

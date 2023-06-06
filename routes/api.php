@@ -19,6 +19,14 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::any('/logout', [AuthController::class, 'logout']);
 
+//todo app routes
+Route::get('todos', [AuthController::class, 'index'])->name('todo.home');
+Route::post('todos/{id', [AuthController::class, 'store'])->name('todo.store');
+Route::get('show', [AuthController::class, 'show'])->name('todo.show');
+Route::post('todos/{id}', [AuthController::class, 'update'])->name('todo.update');
+Route::any('todos/{id}', [AuthController::class, 'destroy'])->name('todo.destroy');
+
+
 Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
     Route::get('/users', [AuthController::class, 'index']);
     Route::get('/current_user', [AuthController::class, 'me']);
